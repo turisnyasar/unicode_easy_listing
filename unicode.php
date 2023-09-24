@@ -1,6 +1,8 @@
 <?php 
 $start = isset($_POST["nilai"])? $_POST["nilai"] : 128000;
 $jumlah = isset($_POST["jumlah"])? $_POST["jumlah"] : 30;
+$start = $start < 0 ? 0 : $start;
+$jumlah = $jumlah < 0 ? 1 : $jumlah;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,14 +74,16 @@ function tambahi(n) {
  nilai.value = parseInt(nilai.value) + n
 }
 function kurangi(n) {
- nilai.value = parseInt(nilai.value) - n
+ if (parseInt(nilai.value) - n > 0)
+      nilai.value = parseInt(nilai.value) - n
 }
 function next(jenis) {
  if (jenis=='+'){
   nilai.value = parseInt(nilai.value) + parseInt(jumlah.value)
  } else
  if (jenis=='-'){
-  nilai.value = parseInt(nilai.value) - parseInt(jumlah.value)
+  if (parseInt(nilai.value) - parseInt(jumlah.value) > 0)
+    nilai.value = parseInt(nilai.value) - parseInt(jumlah.value)
  }
 }
  </script>
